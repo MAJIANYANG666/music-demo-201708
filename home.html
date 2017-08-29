@@ -341,49 +341,85 @@
       color: #E3E3E4;
     }
     .page3>form{
-
-      margin:15px 12px;
-      border:1px solid #EBECEC;
-      position: relative;
-      background: #EBECEC;
-      border-radius:15px;
-      overflow: hidden;
+      padding:15px 10px 14px 10px;
+      border-bottom:1px solid #EEEFF0;
     }
     .page3>form>div{
       display: flex;
-    }
-    .page3>form>div>svg{
-      fill:#CDCDCE;
-      width:1.3em;
-      height:1.3em;
+
       position: relative;
-      top:5px;
+      background: #EBECEC;
+      border-radius:30px;
+      overflow: hidden;
+    }
+    .page3>form>div>svg.icon1{
+      fill:#C9C9CA;
+      width:18px;
+      height:18px;
+      position: relative;
+      top:6px;
       left:5px;
+    }
+    .page3>form>div>svg.icon2{
+      display: none;
+      fill:#B7B8B8;
+      width:15px;
+      height:15px;
+      position: relative;
+      top:7px;
+      right:8px;
     }
     .page3>form>div>input{
       border:none;
       /*text-decoration: none;*/
       outline:none;
       position: relative;
-      left:7px;
-      top:2px;
+      left:10px;
+      top:1px;
       z-index:1;
-      opacity:0.5;
-      background: #EBECEC;
+      background: transparent;
       padding:6px 0 8px;
       flex-grow:1;
-
+      font-size:14px;
+      color: #333;
     }
     .page3>form>div>label{
       position: absolute;
-      left:28px;
+      left:30px;
       top:5px;
       font-size:14px;
-      color: #888;
+      color: #c9c9c9;
     }
-    .page3>h4{
+    .page3>div{
+      padding:15px 10px 0 ;
+    }
+    .page3>div>h4{
       font-size:12px;
       line-height:12px;
+    }
+    .page3>div>ul{
+      margin:10px 0 7px 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .page3>div>ul>li{
+      padding:6px 14px;
+      margin:0 8px 8px 0;
+      font-size:14px;
+      line-height:20px;
+      position: relative;
+    }
+    .page3>div>ul>li::after{
+      content: '';
+      position: absolute;
+      left:0;
+      top:0;
+      width:200%;
+      height:200%;
+      border:1px solid #d3d4da;
+      border-radius:32px;
+      transform:scale(0.5);
+      transform-origin: 0 0;
     }
   </style>
 </head>
@@ -931,28 +967,34 @@
     <div class="page page3">
       <form action="/xxx" method="POST">
         <div class="wrapper">
-          <svg class="icon" >
+          <svg class="icon icon1" >
             <use xlink:href="#icon-search"></use>
           </svg>
           <input type="text" name="search">
+          <svg class="icon icon2" >
+            <use xlink:href="#icon-quxiao"></use>
+          </svg>
           <label>搜索歌曲、歌手、专辑</label>
         </div>
       </form>
-      <h4>热门搜索</h4>
-      <p>七夕</p>
-      <p>那年花开月正圆</p>
-      <p>Taylor Swift</p>
-      <p>带你去旅行</p>
-      <p>全部都是你</p>
-      <p>Diss Gai</p>
-      <p>没有情人的情人节</p>
-      <p>Jony J</p>
-      <p>薛之谦</p>
-
+      <div class="wrapper">
+        <h4>热门搜索</h4>
+        <ul>
+          <li>那年花开月正圆</li>
+          <li>Taylor Swift</li>
+          <li>Jony J</li>
+          <li>你的名字</li>
+          <li>Panama</li>
+          <li>尽头</li>
+          <li>好久不见</li>
+          <li>七夕</li>
+          <li>许嵩</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <script src="//at.alicdn.com/t/font_397568_9uux0absw9vsra4i.js"></script>
+  <script src="//at.alicdn.com/t/font_397568_rovy9r9bg0q9f6r.js"></script>
   <script src="./vendors/jquery.min.js"></script>
   <script>
     $('.tabs').on('click','li',function(e){
