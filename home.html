@@ -370,6 +370,10 @@
       position: relative;
       top:7px;
       right:8px;
+      z-index:1;
+    }
+    .page3>form>div>svg.icon2.active{
+      display: inline-block;
     }
     .page3>form>div>input{
       border:none;
@@ -391,6 +395,9 @@
       top:5px;
       font-size:14px;
       color: #c9c9c9;
+    }
+    .page3>form>div>label.noactive{
+      display: none;
     }
     .page3>div{
       padding:15px 10px 0 ;
@@ -836,15 +843,13 @@
             <use xlink:href="#icon-search"></use>
           </svg>
           <input id="search" type="text" name="search">
-          <svg class="icon icon2" >
+          <svg id="icon2" class="icon icon2" >
             <use xlink:href="#icon-quxiao"></use>
           </svg>
-          <label>搜索歌曲、歌手、专辑</label>
+          <label >搜索歌曲、歌手、专辑</label>
         </div>
       </form>
-      <ul id="Research">
-
-      </ul>
+      
       <div class="wrapper">
         <h4>热门搜索</h4>
         <ul>
@@ -859,6 +864,9 @@
           <li>许嵩</li>
         </ul>
       </div>
+      <ul id="searchResult">
+
+      </ul>
     </div>
   </div>
 
@@ -879,23 +887,34 @@
     $('input#search').on('input',function(e){
         let $input=$(e.currentTarget)
         let value=$input.val().trim()
-        if(value===''){return}
-        let $Research=$('ul#Research')
+        $('label').addClass('noactive')
+        $('.icon2').addClass('active')
+        if(value===''){
+            $('label').removeClass('noactive')
+            return}
+        let $searchResult=$('ul#searchResult')
         var query = new AV.Query('Song');
         query.contains('name', value);
         query.find().then(function (results) {
-            $Research.empty()
+            $searchResult.empty()
             if(results.length===0){
-                $Research.html('结果不存在')
+                $searchResult.html('结果不存在')
             }else{
                 for(let i=0;i<results.length;i++){
 
                     let song=results[i].attributes
                     let li=`<li data-id="${song.objectId}">${song.name} - ${song.singer}</li>`
-                    $Research.append(li)
+                    $searchResult.append(li)
                 }
             }
         })
+    })
+
+    $('.icon2').on('click',function(e){
+
+        $('input#search').val('')
+        $('label').removeClass('noactive')
+
     })
   </script>
   <script>
