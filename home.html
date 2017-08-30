@@ -852,7 +852,7 @@
       
       <div class="wrapper">
         <h4>热门搜索</h4>
-        <ul>
+        <ul id="hot-search">
           <li>那年花开月正圆</li>
           <li>Taylor Swift</li>
           <li>Jony J</li>
@@ -861,7 +861,7 @@
           <li>尽头</li>
           <li>好久不见</li>
           <li>七夕</li>
-          <li>许嵩</li>
+          <li>演员</li>
         </ul>
       </div>
       <ul id="searchResult">
@@ -883,16 +883,27 @@
         page.addClass('active')
         page.siblings('.active').removeClass('active')
     })
-
-    $('input#search').on('input',function(e){
-        let $input=$(e.currentTarget)
-        let value=$input.val().trim()
-        $('label').addClass('noactive')
-        $('.icon2').addClass('active')
+    $('input#search').on('input',function(e) {
+        search()
+    })
+    $('.icon2').on('click',function(e){
+        $('input#search').val('')
+        $('label').removeClass('noactive')
+    })
+    $('#hot-search').on('click','li',function(e){
+        reset()
+        let $li=$(e.currentTarget)
+        let value=$li.text()
+        $('input#search').val(value)
+        search()
+    })
+    function search(){
+        reset()
+        let value=$('input#search').val().trim()
+        let $searchResult = $('ul#searchResult')
         if(value===''){
             $('label').removeClass('noactive')
             return}
-        let $searchResult=$('ul#searchResult')
         var query = new AV.Query('Song');
         query.contains('name', value);
         query.find().then(function (results) {
@@ -901,21 +912,17 @@
                 $searchResult.html('结果不存在')
             }else{
                 for(let i=0;i<results.length;i++){
-
                     let song=results[i].attributes
                     let li=`<li data-id="${song.objectId}">${song.name} - ${song.singer}</li>`
                     $searchResult.append(li)
                 }
             }
         })
-    })
-
-    $('.icon2').on('click',function(e){
-
-        $('input#search').val('')
-        $('label').removeClass('noactive')
-
-    })
+    }
+    function reset(){
+        $('label').addClass('noactive')
+        $('.icon2').addClass('active')
+    }
   </script>
   <script>
       //初始化AV对象
@@ -985,4 +992,4 @@
   </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                           
