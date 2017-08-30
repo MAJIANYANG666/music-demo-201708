@@ -402,6 +402,9 @@
     .page3>div{
       padding:15px 10px 0 ;
     }
+    .page3>div.noactive{
+      display: none;
+    }
     .page3>div>h4{
       font-size:12px;
       line-height:12px;
@@ -429,6 +432,29 @@
       border-radius:32px;
       transform:scale(0.5);
       transform-origin: 0 0;
+    }
+    .page3>.searchKey{
+      color: #5090C9;
+      margin-left:10px;
+      padding-right:10px;
+      line-height:49px;
+      border-bottom: 1px solid #EEEFF0;
+    }
+    .page3>.searchResult{
+      position:relative;
+    }
+    .page3>.searchResult>svg{
+      position:absolute;
+      left:6px;
+      top:12px;
+      fill:#BABBBB;
+      width:1.4em;
+      height:1.4em;
+    }
+    .page3>.searchResult>li {
+      margin-left: 32px;
+      line-height:44px;
+      border-bottom: 1px solid #EEEFF0;
     }
   </style>
 </head>
@@ -850,11 +876,11 @@
         </div>
       </form>
       
-      <div class="wrapper">
+      <div id="wrapper" class="wrapper">
         <h4>热门搜索</h4>
         <ul id="hot-search">
-          <li>那年花开月正圆</li>
-          <li>Taylor Swift</li>
+          <li>你还要我怎样</li>
+          <li>暧昧</li>
           <li>Jony J</li>
           <li>你的名字</li>
           <li>Panama</li>
@@ -864,8 +890,9 @@
           <li>演员</li>
         </ul>
       </div>
-      <ul id="searchResult">
-
+      <ul id="searchKey" class="searchKey">
+      </ul>
+      <ul id="searchResult" class="searchResult">
       </ul>
     </div>
   </div>
@@ -883,19 +910,49 @@
         page.addClass('active')
         page.siblings('.active').removeClass('active')
     })
+    let timer=null
     $('input#search').on('input',function(e) {
-        search()
+        reset()
+        if(timer){window.clearTimeout(timer)}
+        timer=setTimeout(function(){
+            timer=null
+            search()
+            $('#wrapper').addClass('noactive')
+            /*$('#searchResult').addClass('noactive')*/
+            $('#searchKey').empty()
+            let $li=$(e.currentTarget)
+            let value=$li.val()
+            console.log(value)
+            let li=`<li>搜索"${value}"<li/>`
+            $('#searchKey').append(li)
+        },400)
     })
     $('.icon2').on('click',function(e){
         $('input#search').val('')
         $('label').removeClass('noactive')
+        $('#searchKey').empty()
+        $('#wrapper').removeClass('noactive')
+        $('#searchResult').removeClass('noactive')
     })
     $('#hot-search').on('click','li',function(e){
         reset()
         let $li=$(e.currentTarget)
         let value=$li.text()
         $('input#search').val(value)
-        search()
+        timer=null
+        if(timer){window.clearTimeout(timer)}
+        timer=setTimeout(function(){
+            timer=null
+            search()
+            $('#wrapper').addClass('noactive')
+          /*$('#searchResult').addClass('noactive')*/
+            $('#searchKey').empty()
+            let $li=$(e.currentTarget)
+            let value=$li.text()
+            console.log(value)
+            let li=`<li>搜索"${value}"<li/>`
+            $('#searchKey').append(li)
+        },400)
     })
     function search(){
         reset()
@@ -913,7 +970,14 @@
             }else{
                 for(let i=0;i<results.length;i++){
                     let song=results[i].attributes
+                    let svg=`
+                                <svg class="icon">
+                                    <use xlink:href="#icon-search"></use>
+                                </svg>
+                             `
                     let li=`<li data-id="${song.objectId}">${song.name} - ${song.singer}</li>`
+                    $searchResult.append(svg)
+                    console.log(svg)
                     $searchResult.append(li)
                 }
             }
