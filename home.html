@@ -19,6 +19,7 @@
       font-size: 15px;
       font-family: Helvetica, sans-serif;
       color: #333;
+      background: #FCFCFD;
     }
     .icon {
       width: 1em; height: 1em;
@@ -440,10 +441,13 @@
       line-height:49px;
       border-bottom: 1px solid #EEEFF0;
     }
-    .page3>.searchResult{
+    .page3>.searchResult.noactive{
+      display: none;
+    }
+    .page3>.searchResult>div{
       position:relative;
     }
-    .page3>.searchResult>svg{
+    .page3>.searchResult>div>svg{
       position:absolute;
       left:6px;
       top:12px;
@@ -451,10 +455,30 @@
       width:1.4em;
       height:1.4em;
     }
-    .page3>.searchResult>li {
+    .page3>.searchResult>div>li {
       margin-left: 32px;
       line-height:44px;
       border-bottom: 1px solid #EEEFF0;
+    }
+
+    .page3>.searchLog>div{
+      position:relative;
+    }
+    .page3>.searchLog>div>svg{
+      position:absolute;
+      left:6px;
+      top:12px;
+      fill:#BABBBB;
+      width:1.4em;
+      height:1.4em;
+    }
+    .page3>.searchLog>div>li {
+      margin-left: 32px;
+      line-height:44px;
+      border-bottom: 1px solid #EEEFF0;
+    }
+    .page3>.searchLog.noactive{
+      display: none;
     }
   </style>
 </head>
@@ -875,32 +899,34 @@
           <label >搜索歌曲、歌手、专辑</label>
         </div>
       </form>
-      
       <div id="wrapper" class="wrapper">
         <h4>热门搜索</h4>
         <ul id="hot-search">
           <li>你还要我怎样</li>
           <li>暧昧</li>
-          <li>Jony J</li>
+          <li>演员</li>
           <li>你的名字</li>
           <li>Panama</li>
           <li>尽头</li>
           <li>好久不见</li>
           <li>七夕</li>
-          <li>演员</li>
+          <li>Jony J</li>
         </ul>
       </div>
       <ul id="searchKey" class="searchKey">
       </ul>
       <ul id="searchResult" class="searchResult">
       </ul>
+      <ul id="searchLog" class="searchLog">
+      </ul>
     </div>
   </div>
 
-  <script src="//at.alicdn.com/t/font_397568_rovy9r9bg0q9f6r.js"></script>
+  <script src="//at.alicdn.com/t/font_397568_alv0ugm2r0wqxgvi.js"></script>
   <script src="./vendors/jquery.min.js"></script>
   <script src="./vendors/av-min.js"></script>
   <script>
+    /*tabs*/
     $('.tabs').on('click','li',function(e){
         let $li=$(e.currentTarget)
         let index=$li.index()
@@ -910,6 +936,7 @@
         page.addClass('active')
         page.siblings('.active').removeClass('active')
     })
+    /*input输入*/
     let timer=null
     $('input#search').on('input',function(e) {
         reset()
@@ -917,23 +944,27 @@
         timer=setTimeout(function(){
             timer=null
             search()
+            $('#searchLog').addClass('noactive')
+
             $('#wrapper').addClass('noactive')
-            /*$('#searchResult').addClass('noactive')*/
             $('#searchKey').empty()
             let $li=$(e.currentTarget)
             let value=$li.val()
-            console.log(value)
             let li=`<li>搜索"${value}"<li/>`
             $('#searchKey').append(li)
         },400)
     })
+    /*点击取消input内容*/
     $('.icon2').on('click',function(e){
         $('input#search').val('')
         $('label').removeClass('noactive')
         $('#searchKey').empty()
         $('#wrapper').removeClass('noactive')
-        $('#searchResult').removeClass('noactive')
+        $('#searchLog').removeClass('noactive')
+        $('#searchResult').addClass('noactive')
+
     })
+    /*点击热搜*/
     $('#hot-search').on('click','li',function(e){
         reset()
         let $li=$(e.currentTarget)
@@ -944,8 +975,11 @@
         timer=setTimeout(function(){
             timer=null
             search()
+            $('#searchResult').removeClass('noactive')
+            $('#searchLog').addClass('noactive')
+
             $('#wrapper').addClass('noactive')
-          /*$('#searchResult').addClass('noactive')*/
+
             $('#searchKey').empty()
             let $li=$(e.currentTarget)
             let value=$li.text()
@@ -954,35 +988,58 @@
             $('#searchKey').append(li)
         },400)
     })
+    /*查找函数*/
     function search(){
         reset()
         let value=$('input#search').val().trim()
         let $searchResult = $('ul#searchResult')
+        let $searchLog = $('ul#searchLog')
         if(value===''){
             $('label').removeClass('noactive')
             return}
         var query = new AV.Query('Song');
         query.contains('name', value);
         query.find().then(function (results) {
+            console.log(1)
             $searchResult.empty()
             if(results.length===0){
-                $searchResult.html('结果不存在')
+//                $searchResult.html('结果不存在')
             }else{
                 for(let i=0;i<results.length;i++){
                     let song=results[i].attributes
-                    let svg=`
-                                <svg class="icon">
-                                    <use xlink:href="#icon-search"></use>
-                                </svg>
+                    let div=`
+                                <div>
+                                    <svg class="icon">
+                                        <use xlink:href="#icon-search"></use>
+                                    </svg>
+                                    <li data-id="${song.objectId}">${song.name} - ${song.singer}</li>
+                                </div>
                              `
-                    let li=`<li data-id="${song.objectId}">${song.name} - ${song.singer}</li>`
-                    $searchResult.append(svg)
-                    console.log(svg)
-                    $searchResult.append(li)
+                    $searchResult.append(div)
+                    console.log(div)
+                }
+            }
+        })
+        query.find().then(function (results) {
+            if(results.length===0){
+//                $searchResult.html('结果不存在')
+            }else{
+                for(let i=0;i<results.length;i++){
+                    let song=results[i].attributes
+                    let div=`
+                                <div>
+                                    <svg class="icon">
+                                        <use xlink:href="#icon-shizhong"></use>
+                                    </svg>
+                                    <li data-id="${song.objectId}">${song.name} - ${song.singer}</li>
+                                </div>
+                             `
+                    $searchLog.prepend(div)
                 }
             }
         })
     }
+    /*重置函数（点击时清理input内容，消除取消键）*/
     function reset(){
         $('label').addClass('noactive')
         $('.icon2').addClass('active')
