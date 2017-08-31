@@ -1,0 +1,19 @@
+*{margin:0;  padding:0;border-box:box-sizing;}
+*::before{border-box:box-sizing;}
+*::after{border-box:box-sizing;}
+a{text-decoration: none;color:inherit;
+    vertical-align: top;}
+ul,ol,li{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-weight: normal;}
+body{
+    font-size: 15px;
+    font-family: Helvetica, sans-serif;
+    color: #333;
+    background: #FCFCFD;
+}
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: red;
+    overflow: hidden;
+}
