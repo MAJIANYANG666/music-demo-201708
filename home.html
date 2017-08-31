@@ -464,16 +464,25 @@
     .page3>.searchLog>div{
       position:relative;
     }
-    .page3>.searchLog>div>svg{
+    .page3>.searchLog>div>svg.icon3{
       position:absolute;
-      left:6px;
-      top:12px;
+      left:8px;
+      top:13px;
       fill:#BABBBB;
-      width:1.4em;
-      height:1.4em;
+      width:1.2em;
+      height:1.2em;
+    }
+    .page3>.searchLog>div>svg.icon4{
+      position:absolute;
+      right:8px;
+      top:13px;
+      fill:#BABBBB;
+      width:1.2em;
+      height:1.2em;
+      z-index:100;
     }
     .page3>.searchLog>div>li {
-      margin-left: 32px;
+      margin-left: 33px;
       line-height:44px;
       border-bottom: 1px solid #EEEFF0;
     }
@@ -922,7 +931,7 @@
     </div>
   </div>
 
-  <script src="//at.alicdn.com/t/font_397568_alv0ugm2r0wqxgvi.js"></script>
+  <script src="//at.alicdn.com/t/font_397568_1pgfmmfiz6o8byb9.js"></script>
   <script src="./vendors/jquery.min.js"></script>
   <script src="./vendors/av-min.js"></script>
   <script>
@@ -956,6 +965,7 @@
     })
     /*点击取消input内容*/
     $('.icon2').on('click',function(e){
+        console.log(50)
         $('input#search').val('')
         $('label').removeClass('noactive')
         $('#searchKey').empty()
@@ -987,6 +997,12 @@
             let li=`<li>搜索"${value}"<li/>`
             $('#searchKey').append(li)
         },400)
+    })
+    /*点击取消搜索记录*/
+    $('#searchLog').on('click','#icon4',function(e){
+        let $icon4=$(e.currentTarget)
+        let $div=$icon4.parent()
+        $div.remove()
     })
     /*查找函数*/
     function search(){
@@ -1027,12 +1043,16 @@
                 for(let i=0;i<results.length;i++){
                     let song=results[i].attributes
                     let div=`
-                                <div>
-                                    <svg class="icon">
+                                <div id="div">
+                                    <svg class="icon icon3">
                                         <use xlink:href="#icon-shizhong"></use>
                                     </svg>
                                     <li data-id="${song.objectId}">${song.name} - ${song.singer}</li>
+                                    <svg id="icon4" class="icon icon4">
+                                        <use xlink:href="#icon-quxiao1"></use>
+                                    </svg>
                                 </div>
+
                              `
                     $searchLog.prepend(div)
                 }
