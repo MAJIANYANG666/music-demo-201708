@@ -147,12 +147,15 @@
             overflow: hidden;
 
         }
-        section.lyric>.lyrics>li{
+        section.lyric>.lyrics>,lines{
+            transition:transform 0.3s;
+        }
+        section.lyric>.lyrics li{
             font-size:13px;
             color: #aaa;
             line-height:24px;
         }
-        section.lyric>.lyrics>li.active{
+        section.lyric>.lyrics li.active{
             color: white;
         }
         section.actions{
@@ -193,6 +196,7 @@
             <ul id="title" class="title">
             </ul>
             <ul id="lyrics" class="lyrics">
+                <div class="lines"></div>
             </ul>
         </section>
         <section class="actions">
@@ -216,7 +220,7 @@
         }
         var id  = getParameterByName('id');
         var query = new AV.Query('Song');
-        /*通过id得到歌曲资源,添加播放，歌词和暂停*/
+        /*通过id得到歌曲资源,添加播放，暂停和暂停歌词*/
         query.get(id).then(function (song) {
             let {url,lyric,image,name,singer}=song.attributes
             initPlayer.call(undefined,url)
@@ -251,6 +255,29 @@
                 $('#circle').removeClass('playing')
                 $('.pointer').removeClass('playing')
             })
+            setInterval(function(){
+                let time=video.currentTime
+                let $lines=$('.lines>li')
+                let $whichLine
+                for(let i=0;i<$lines.length;i++){
+//                    $lines[i+1]!==undefined
+                    if($lines.eq(i+1).length!==0 && $lines.eq(i).attr('data-time')<=time && $lines.eq(i+1).attr('data-time')>time){
+                        $whichLine=$lines.eq(i)
+                    }
+                }
+                if($whichLine){
+                    $whichLine.addClass('active').prev().removeClass('active');
+                    console.log(100)
+                    let top=$whichLine.offset().top
+                    let linesTop=$('.lines').offset().top
+                    let height=$('.lyrics').height()/3
+                    let delta=top-linesTop-height
+                    $('.lines').css('transform',`translateY(-${delta}px)`)
+                }
+
+            },300)
+
+
         }
         function parseLyric(lyric){
             let array=[]
@@ -264,27 +291,12 @@
                 let seconds=+matches[2]
                 array.push({time:minute*60+seconds,lyric:xxx[1]})
             })
-            console.log(1)
-            //输入歌词函数
-//            let video=document.createElement('video')
-            for(let i=0;i<array.length;i++){
-                let li=`<li id="li">${array[i].lyric}</li>`
-                $('#lyrics').append(li)
-            }
-//            let current=video.currentTime
-//            for(let i=0;i<array.length;i++){
-//                if(i===array.length-1){
-//                    $('#li').attr('color','#ddd')
-//                    console.log($('#li'))
-//                    break
-//                }else if(array[i].time<=current&&array[i+1].time>current){
-////                     let li=`<li>${array[i].lyric}</li>`
-////                     $('#ul').append(li)
-////                     $('#li').css('color','black')
-//                    console.log($('#li'))
-//                    break
-//                }
-//            }
+            array.map(function(object){
+                if(!object){return}
+                let li=`<li id="li" data-time="${object.time}">${object.lyric}</li>`
+                $('.lines').append(li)
+            })
+
         }
     </script>
 </body>
