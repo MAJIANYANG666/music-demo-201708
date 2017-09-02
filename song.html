@@ -218,24 +218,46 @@
         var query = new AV.Query('Song');
         /*通过id得到歌曲资源,添加播放，歌词和暂停*/
         query.get(id).then(function (song) {
-            let video=document.createElement('video')
-            let url=song.attributes.url
-            let lyric=song.attributes.lyric
-            let image=song.attributes.image
-            let name=song.attributes.name
-            let singer=song.attributes.singer
+            let {url,lyric,image,name,singer}=song.attributes
+            initPlayer.call(undefined,url)
+            initText.call(undefined,lyric,name,image,singer)
+
+        })
+        function initText(lyric,name,image,singer) {
             let li=`<li><span>${name}</span> - ${singer}`
             $('#title').append(li)
             $('#disk-image').attr("src",image)
-            $('#page').append(`<style>#page::before{background:transparent url(${image}) no-repeat center center;background-size:cover;}</style>`);
+            $('#page').append(`<style>
+                                    #page::before{
+                                                    background:transparent url(${image}) no-repeat center center;
+                                                    background-size:cover;
+                                                  }
+                                </style>`);
+            parseLyric.call(undefined,lyric)
+        }
+        function initPlayer(url){
+            let video=document.createElement('video')
             video.src=url
-//            video.play()
+            //点击播放按钮
+            $('#play').on('click',function(){
+                video.play()
+                $('#circle').addClass('playing')
+                $('.pointer').addClass('playing')
+            })
+            //点击暂停按钮
+            $('#pause').on('click',function(){
+                video.pause()
+                console.log(10)
+                $('#circle').removeClass('playing')
+                $('.pointer').removeClass('playing')
+            })
+        }
+        function parseLyric(lyric){
             let array=[]
             let parts=lyric.split('\n')
-            console.log(2)
-            parts.forEach(function(string,index){
+            parts.map(function(string,index){
                 let xxx=string.split(']')
-                 xxx[0]=xxx[0].substring(1)
+                xxx[0]=xxx[0].substring(1)
                 let regex=/(\d+):([\d.]+)/
                 let matches=xxx[0].match(regex)
                 let minute=+matches[1]
@@ -243,40 +265,27 @@
                 array.push({time:minute*60+seconds,lyric:xxx[1]})
             })
             console.log(1)
-            $('#play').on('click',function(){
-                video.play()
-                $('#circle').addClass('playing')
-                $('.pointer').addClass('playing')
-
-            })
-            $('#pause').on('click',function(){
-                video.pause()
-                console.log(10)
-                $('#circle').removeClass('playing')
-                $('.pointer').removeClass('playing')
-
-            })
             //输入歌词函数
+//            let video=document.createElement('video')
             for(let i=0;i<array.length;i++){
                 let li=`<li id="li">${array[i].lyric}</li>`
                 $('#lyrics').append(li)
             }
-            let current=video.currentTime
-            for(let i=0;i<array.length;i++){
-                 if(i===array.length-1){
-                     $('#li').attr('color','#ddd')
-                     console.log($('#li'))
-                     break
-                 }else if(array[i].time<=current&&array[i+1].time>current){
-//                     let li=`<li>${array[i].lyric}</li>`
-//                     $('#ul').append(li)
-//                     $('#li').css('color','black')
-                     console.log($('#li'))
-                     break
-                 }
-            }
-
-        })
+//            let current=video.currentTime
+//            for(let i=0;i<array.length;i++){
+//                if(i===array.length-1){
+//                    $('#li').attr('color','#ddd')
+//                    console.log($('#li'))
+//                    break
+//                }else if(array[i].time<=current&&array[i+1].time>current){
+////                     let li=`<li>${array[i].lyric}</li>`
+////                     $('#ul').append(li)
+////                     $('#li').css('color','black')
+//                    console.log($('#li'))
+//                    break
+//                }
+//            }
+        }
     </script>
 </body>
 </html>                                          
