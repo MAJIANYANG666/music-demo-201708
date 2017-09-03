@@ -143,7 +143,7 @@
 
         }
         section.lyric>.lyrics{
-            height:72px;
+            height:78px;
             overflow: hidden;
 
         }
@@ -153,7 +153,7 @@
         section.lyric>.lyrics li{
             font-size:13px;
             color: #aaa;
-            line-height:24px;
+            line-height:26px;
         }
         section.lyric>.lyrics li.active{
             color: white;
@@ -251,7 +251,6 @@
             //点击暂停按钮
             $('#pause').on('click',function(){
                 video.pause()
-                console.log(10)
                 $('#circle').removeClass('playing')
                 $('.pointer').removeClass('playing')
             })
@@ -267,17 +266,13 @@
                 }
                 if($whichLine){
                     $whichLine.addClass('active').prev().removeClass('active');
-                    console.log(100)
                     let top=$whichLine.offset().top
                     let linesTop=$('.lines').offset().top
                     let height=$('.lyrics').height()/3
                     let delta=top-linesTop-height
                     $('.lines').css('transform',`translateY(-${delta}px)`)
                 }
-
             },300)
-
-
         }
         function parseLyric(lyric){
             let array=[]
@@ -290,7 +285,7 @@
                 let minute=+matches[1]
                 let seconds=+matches[2]
                 array.push({time:minute*60+seconds,lyric:xxx[1]})
-            })
+         })
             array.map(function(object){
                 if(!object){return}
                 let li=`<li id="li" data-time="${object.time}">${object.lyric}</li>`

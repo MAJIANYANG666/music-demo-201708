@@ -440,7 +440,7 @@
       width:1.4em;
       height:1.4em;
     }
-    .page3>.searchResult>div>li {
+    .page3>.searchResult>div li {
       margin-left: 32px;
       line-height:44px;
       border-bottom: 1px solid #EEEFF0;
@@ -466,7 +466,7 @@
       height:1.2em;
       z-index:100;
     }
-    .page3>.searchLog>div>li {
+    .page3>.searchLog>div li {
       margin-left: 33px;
       line-height:44px;
       border-bottom: 1px solid #EEEFF0;
@@ -931,7 +931,7 @@
         page.addClass('active')
         page.siblings('.active').removeClass('active')
     })
-    /*input输入*/
+    /*输入input*/
     let timer=null
     $('input#search').on('input',function(e) {
         reset()
@@ -949,7 +949,7 @@
             $('#searchKey').append(li)
         },400)
     })
-    /*点击取消input内容*/
+    /*点击取消input按钮*/
     $('.icon2').on('click',function(e){
         console.log(50)
         $('input#search').val('')
@@ -1014,7 +1014,7 @@
                                     <svg class="icon">
                                         <use xlink:href="#icon-search"></use>
                                     </svg>
-                                    <li data-id="${results[i].id}"><a href="./song.html?id=${results[i].id}">${song.name} - ${song.singer}</a></li>
+                                    <a href="./song.html?id=${results[i].id}"><li data-id="${results[i].id}">${song.name} - ${song.singer}</li></a>
                                 </div>
                              `
                     $searchResult.append(div)
@@ -1033,7 +1033,7 @@
                                     <svg class="icon icon3">
                                         <use xlink:href="#icon-shizhong"></use>
                                     </svg>
-                                    <li data-id="${results[i].id}"><a href="./song.html?id=${results[i].id}">${song.name} - ${song.singer}</a></li>
+                                    <a href="./song.html?id=${results[i].id}"><li data-id="${results[i].id}">${song.name} - ${song.singer}</li></a>
                                     <svg id="icon4" class="icon icon4">
                                         <use xlink:href="#icon-quxiao1"></use>
                                     </svg>
