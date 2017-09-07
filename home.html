@@ -498,55 +498,55 @@
           <li>
             <a href="#">
               <div>
-                <img src="https://i.loli.net/2017/08/27/59a28fb889be9.jpg" alt="">
+                <img src="//i.loli.net/2017/09/07/59b0e3b3eb42e.jpg" alt="">
                 <span>168.9万</span>
               </div>
-              <p>我们小仙女不需要男朋友</p>
+              <p>他（她）们不但演的好，唱的也不赖</p>
             </a>
           </li>
           <li>
             <a href="#">
               <div>
-                <img src="https://i.loli.net/2017/08/27/59a28fb889be9.jpg" alt="">
+                <img src="//i.loli.net/2017/09/07/59b0e48aad9e5.jpg" alt="">
                 <span>168.9万</span>
               </div>
-              <p>我们小仙女不需要男朋友</p>
+              <p>试一试，你也是不经意的词人</p>
             </a>
           </li>
           <li>
             <a href="#">
               <div>
-                <img src="https://i.loli.net/2017/08/27/59a28fb889be9.jpg" alt="">
+                <img src="//i.loli.net/2017/09/07/59b0e43d2d412.jpg" alt="">
                 <span>168.9万</span>
               </div>
-              <p>我们小仙女不需要男朋友</p>
+              <p>「中国嘻哈」着迷说唱</p>
             </a>
           </li>
           <li>
             <a href="#">
               <div>
-                <img src="https://i.loli.net/2017/08/27/59a28fb889be9.jpg" alt="">
+                <img src="//i.loli.net/2017/09/07/59b0e5b5be15d.jpg" alt="">
                 <span>168.9万</span>
               </div>
-              <p>我们小仙女不需要男朋友</p>
+              <p>粤语男声：我爱你依旧如初，不曾改变。</p>
             </a>
           </li>
           <li>
             <a href="#">
               <div>
-                <img src="https://i.loli.net/2017/08/27/59a28fb889be9.jpg" alt="">
+                <img src="//i.loli.net/2017/09/07/59b0e5f98cbb6.jpg" alt="">
                 <span>168.9万</span>
               </div>
-              <p>我们小仙女不需要男朋友</p>
+              <p>那些在你酩酊大醉后嘶吼出来的心事</p>
             </a>
           </li>
           <li>
             <a href="#">
               <div>
-                <img src="https://i.loli.net/2017/08/27/59a28fb889be9.jpg" alt="">
+                <img src="//i.loli.net/2017/09/07/59b0e6ba038c6.jpg" alt="">
                 <span>168.9万</span>
               </div>
-              <p>我们小仙女不需要男朋友</p>
+              <p>【 Taylor Swift 丨才女的进化史 〗</p>
             </a>
           </li>
         </ul>
@@ -923,11 +923,11 @@
   <script>
     /*tabs*/
     $('.tabs').on('click','li',function(e){
-        let $li=$(e.currentTarget)
-        let index=$li.index()
+        var $li=$(e.currentTarget)
+        var index=$li.index()
         $li.addClass('active')
         $li.siblings('.active').removeClass('active')
-        let page=$li.parent().parent().parent().next().children().eq(index)
+        var page=$li.parent().parent().parent().next().children().eq(index)
         page.addClass('active')
         page.siblings('.active').removeClass('active')
     })
@@ -1052,7 +1052,7 @@
     }
   </script>
   <script>
-
+      //加载完成显示最新英语
       var query = new AV.Query('Song');
       query.find().then(function (results) {
           $('#songs-loading').remove()
@@ -1081,6 +1081,53 @@
           alert('获取歌曲失败')
       });
 
+      //存储信息
+      /* var SongObject = AV.Object.extend('Song'); //生成一个新的数据库
+      var songObject = new SongObject();//在数据库生成新的记录
+      songObject.set({
+          name:'中国话(2017《开学第一课》“字以溯源”插曲)',
+          singer:'任嘉伦 - 中国话',
+          url:'//m10.music.126.net/20170907145841/36ef6502031cd3fc810d73424bb84b2f/ymusic/fa2c/2e47/e90d/43485ae00085dd727213c87cf0c36ee5.mp3'
+      })
+      var songObject2 = new SongObject();
+      songObject2.set({
+          'name':'雨のち感情論',
+          singer:'和楽器バンド ',
+          url:'//m10.music.126.net/20170907152156/a04186765d117feab3322cd971ffadf0/ymusic/1701/9bcc/c311/01ce34cc0df89b2ad3ead0fd82ef29e8.mp3'
+      })
+      var songObject3 = new SongObject();
+      songObject3.set({
+          'name':'一剪梅 舟过吴江（《诗词歌赋》作品集）',
+          singer:'简弘亦 ',
+          url:'//m10.music.126.net/20170907153240/f7cdb7e0d1c989d60a3167b4b9c333c3/ymusic/1701/9bcc/c311/01ce34cc0df89b2ad3ead0fd82ef29e8.mp3'
+          })
+//      var songObject4 = new SongObject();
+//      songObject4.set({
+          'name':'어차피 잊`을 거면서',
+          singer:'俊昊 / CHEEZE',
+          url:'//m10.music.126.net/20170907153428/92ec240b4ecebb22f11e4f2367a04660/ymusic/55c3/b2ae/d7cf/0412ae99a735df3ef7a4d1503135e18a.mp3'
+      })
+      var songObject5 = new SongObject();
+      songObject5.set({
+          'name':'Blood on the Dance Floor X Dangerous (The White Panda Mash-Up)',
+          singer:'Michael Jackson / The White Panda ',
+          url:'//m10.music.126.net/20170907153445/f0b16c590ccef7285346b26d62d47c55/ymusic/f6ed/3370/cb50/a317aef16c4ba9b4973296e586a08ef5.mp3'
+      })
+      var songObject6 = new SongObject();
+      songObject6.set({
+          'name':'주르륵',
+          singer:'My-Q / TAEK',
+          url:'//m10.music.126.net/20170907153518/20f1a3493e36c5ddaab40ab8ef7697d2/ymusic/016a/e85d/61bf/51f49cbce64f712a39341f57aea1b28c.mp3'
+      })
+      var songObject7 = new SongObject();
+      songObject7.set({
+          'name':'见坏就收',
+          singer:'张信哲',
+          url:'//m10.music.126.net/20170907153545/37c021d236f9244f5ee82891dfd6ef14/ymusic/a964/a4a7/d7e8/d7f646e048df9b5a5a41d9f5a70e6fda.mp3'
+      })
+      let songs=[songObject,songObject2,songObject3,songObject4,songObject5,songObject6,songObject7]
+      AV.Object.saveAll(songs)
+*/
       /*var SongObject = AV.Object.extend('Song'); //生成一个新的数据库
       var songObject = new SongObject();//在数据库生成新的记录*/
       /*songObject.set('name','1')*/
