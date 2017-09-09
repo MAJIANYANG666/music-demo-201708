@@ -240,22 +240,22 @@
             parseLyric.call(undefined,lyric)
         }
         function initPlayer(url){
-            let video=document.createElement('video')
-            video.src=url
+            let audio=document.createElement('audio')
+            audio.src=url
             //点击播放按钮
             $('#play').on('click',function(){
-                video.play()
+                audio.play()
                 $('#circle').addClass('playing')
                 $('.pointer').addClass('playing')
             })
             //点击暂停按钮
             $('#pause').on('click',function(){
-                video.pause()
+                audio.pause()
                 $('#circle').removeClass('playing')
                 $('.pointer').removeClass('playing')
             })
             setInterval(function(){
-                let time=video.currentTime
+                let time=audio.currentTime
                 let $lines=$('.lines>li')
                 let $whichLine
                 for(let i=0;i<$lines.length;i++){
