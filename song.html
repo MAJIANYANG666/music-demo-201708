@@ -13,6 +13,7 @@
         }
         .page{
             position: relative;
+            height:100vh;
             padding-top:0.1px;
             display: flex;
             flex-direction: column;
@@ -128,7 +129,9 @@
                 transform: rotateZ(360deg);
             }
         }
-        section.lyric{text-align: center;
+        section.lyric{
+            text-align: center;
+            flex-grow:1;
             }
         section.lyric>.title{
             margin-top:15px;
@@ -144,7 +147,6 @@
         section.lyric>.lyrics{
             height:78px;
             overflow: hidden;
-
         }
         section.lyric>.lyrics>,lines{
             transition:transform 0.3s;
@@ -159,10 +161,9 @@
         }
         section.actions{
             text-align: center;
-            flex-grow:1;
-            margin-top:70px;
         }
         section.actions>span{
+            display:inline-block;
             padding:9px 42px;
             border:1px solid #D43B32;
             border-radius:5px;
