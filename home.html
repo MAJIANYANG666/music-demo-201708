@@ -448,12 +448,39 @@
       </ul>
     </div>
   </div>
-
   <script src="//at.alicdn.com/t/font_397568_1pgfmmfiz6o8byb9.js"></script>
   <script src="./vendors/jquery.min.js"></script>
   <script src="./vendors/av-min.js"></script>
   <script src="./scripts/av.js"></script>
   <script src="./src/home.js"></script>
+  <!--<script data-main="./src/home.js" src="./vendors/require.js"></script>-->
+  <script src="./src/loadSongs.js"></script>
+  <script src="./src/search.js"></script>
+  <script>
+      window.app={}
+      window.loadScript=function(url,callback){
+          let script=document.createElement('script')
+          script.src=url
+          script.onload=function() {
+              callback()
+          }
+          document.head.appendChild(script)
+      }
+  </script>
+  <script>
+      if(!app.tabs){
+          loadScript('./src/tabs.js',function(){
+              app.tabs('.tabs')
+          })
+      }else{
+          app.tabs('.tabs')
+      }
+  </script>
+  <script src="./src/tabs.js"></script>
+
+
+
+
 </body>
 </html>
                                                                                                                                                                                                                                                                                            

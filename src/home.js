@@ -1,28 +1,4 @@
-/*tabs*/
-$('.tabs').on('click','li',function(e){
-    var $li=$(e.currentTarget)
-    var index=$li.index()
-    $li.addClass('active').siblings('.active').removeClass('active')
-    var $page=$li.parent().parent().parent().next().children().eq(index)
-    $page.addClass('active').siblings('.active').removeClass('active')
-})
-/*输入input*/
-let timer=null
-$('input#search').on('input',function(e) {
-    reset()
-    if(timer){window.clearTimeout(timer)}
-    timer=setTimeout(function(){
-        timer=null
-        search()
-        $('#searchLog').addClass('noactive')
-        $('#wrapper').addClass('noactive')
-        $('#searchKey').empty()
-        let $li=$(e.currentTarget)
-        let value=$li.val()
-        let li=`<li>搜索"${value}"<li/>`
-        $('#searchKey').append(li)
-    },400)
-})
+
 /*点击取消input按钮*/
 $('.icon2').on('click',function(e){
     $('input#search').val('')
@@ -35,8 +11,7 @@ $('.icon2').on('click',function(e){
 /*点击热搜*/
 $('#hot-search').on('click','li',function(e){
     reset()
-    let $li=$(e.currentTarget)
-    let value=$li.text()
+    let value=$(e.currentTarget).text()
     $('input#search').val(value)
     timer=null
     if(timer){window.clearTimeout(timer)}
@@ -90,7 +65,6 @@ function search(){
                                 </div>
                              `
                 $searchResult.append(div)
-                console.log(div)
             }
         }
     })
@@ -122,36 +96,6 @@ function reset(){
     $('label').addClass('noactive')
     $('.icon2').addClass('active')
 }
-
-//加载完成显示最新英语
-var query = new AV.Query('Song');
-query.find().then(function (results) {
-    $('#songs-loading').remove()
-    for(i=0;i<results.length;i++){
-        let $ulsong=$('ul#song')
-        let song=results[i].attributes
-        let li=`
-                      <li>
-                        <a href="./song.html?id=${results[i].id}">
-                          <div class="wrapper">
-                            <h3>${song.name}</h3>
-                            <svg class="icon " >
-                              <use xlink:href="#icon-SQ"></use>
-                            </svg>
-                            <p>${song.singer}</p>
-                          </div>
-                          <svg class="icon " >
-                            <use xlink:href="#icon-bofangjian60px"></use>
-                          </svg>
-                        </a>
-                      </li>
-                    `
-        $ulsong.append(li)
-    }
-}, function (error) {
-    alert('获取歌曲失败')
-});
-
 //存储信息
 /* var SongObject = AV.Object.extend('Song'); //生成一个新的数据库
  var songObject = new SongObject();//在数据库生成新的记录

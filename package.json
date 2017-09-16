@@ -1,12 +1,13 @@
 {
   "name": "music-2",
   "version": "1.0.0",
-  "description": "https://majianyang666.github.io/music-demo-201708/home.html",
+  "description": "majianyang",
   "main": "index.js",
   "dependencies": {
     "jquery": "^3.2.1",
     "leancloud-storage": "^3.1.1",
-    "postcss-cli": "^4.1.1"
+    "postcss-cli": "^4.1.1",
+    "requirejs": "^2.3.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -18,12 +19,14 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.3.0",
     "eslint-plugin-standard": "^3.0.1",
+    "gulp": "^3.9.1",
     "postcss": "^6.0.11",
     "uglify": "^0.1.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf dist/*;postcss --use autoprefixer --dir dist/ src/*.css;eslint src/*.js && babel src/home.js | uglifyjs > dist/home.js; echo 'success';"
+    "build": "rm -rf dist/*;postcss --use autoprefixer --dir dist/ src/*.css;eslint src/*.js && babel src/home.js | uglifyjs > dist/home.js; echo 'success';",
+    "build2": "gulp"
   },
   "repository": {
     "type": "git",
