@@ -10,7 +10,9 @@
     "requirejs": "^2.3.5"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
     "eslint": "^4.6.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
@@ -18,11 +20,21 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.3.0",
     "eslint-plugin-standard": "^3.0.1",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "node-sass": "^4.5.3",
     "postcss": "^6.0.11",
+    "sass-loader": "^6.0.6",
+    "scss-loader": "0.0.1",
+    "style-loader": "^0.18.2",
     "uglify": "^0.1.5",
     "webpack": "^3.6.0"
   },
-  "scripts": {},
+  "scripts": {
+    "build":"webpack",
+    "watch":"webpack -w",
+    "deploy":"webpack -p"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MAJIANYANG666/music-demo-201708.git"
