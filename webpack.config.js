@@ -1,14 +1,20 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractCASS = new ExtractTextPlugin('dist/[name]-one.css');
-const extractLESS = new ExtractTextPlugin('dist/[name]-two.css');
+const extractCASS = new ExtractTextPlugin('[name]-one.css');
+const extractLESS = new ExtractTextPlugin('[name]-two.css');
 const extractCSS = new ExtractTextPlugin('dist/[name]-three.css');
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/home1.js',
   output: {
-    filename: './dist/bundle.js'
+    path: __dirname + '/dist',
+    filename: 'bundle.js'
   },
   plugins: [
+    new HtmlWebpackPlugin(
+      {
+        template:'template.html'
+      }
+    ),
      extractCASS,
      extractLESS,
      extractCSS,
