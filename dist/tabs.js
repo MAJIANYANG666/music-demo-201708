@@ -1,16 +1,1 @@
-'use strict';
-
-/*tabs*/
-!function ($, app) {
-    function tabs(selectorOrDom) {
-        var $tabs = $(selectorOrDom);
-        $tabs.on('click', 'li', function (e) {
-            var $li = $(e.currentTarget);
-            var index = $li.index();
-            $li.addClass('active').siblings('.active').removeClass('active');
-            var $page = $li.parent().parent().parent().next().children().eq(index);
-            $page.addClass('active').siblings('.active').removeClass('active');
-        });
-    }
-    app.tabs = tabs;
-}(jQuery, app);
+"use strict";!function(e,a){a.tabs=function(a){e(a).on("click","li",function(a){var i=e(a.currentTarget),t=i.index();i.addClass("active").siblings(".active").removeClass("active"),i.parent().parent().parent().next().children().eq(t).addClass("active").siblings(".active").removeClass("active")})}}(jQuery,app);

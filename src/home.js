@@ -13,7 +13,7 @@ $('#hot-search').on('click','li',function(e){
     reset()
     let value=$(e.currentTarget).text()
     $('input#search').val(value)
-    timer=null
+    let timer=null
     if(timer){window.clearTimeout(timer)}
     timer=setTimeout(function(){
         timer=null

@@ -452,10 +452,6 @@
   <script src="./vendors/jquery.min.js"></script>
   <script src="./vendors/av-min.js"></script>
   <script src="./scripts/av.js"></script>
-  <script src="./dist/home.js"></script>
-  <!--<script data-main="./src/home.js" src="./vendors/require.js"></script>-->
-  <script src="./dist/loadSongs.js"></script>
-  <script src="./dist/search.js"></script>
   <script>
       window.app={}
       window.loadScript=function(url,callback){
@@ -467,6 +463,11 @@
           document.head.appendChild(script)
       }
   </script>
+
+  <script src="./dist/home.js"></script>
+  <!--<script data-main="./src/home.js" src="./vendors/require.js"></script>-->
+  <script src="./dist/loadSongs.js"></script>
+  <script src="./dist/search.js"></script>
   <script>
       if(!app.tabs){
           loadScript('./src/tabs.js',function(){

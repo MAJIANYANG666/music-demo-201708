@@ -21,6 +21,8 @@
     "eslint-plugin-react": "^7.3.0",
     "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-minify": "^1.0.0",
     "gulp-postcss": "^7.0.0",
     "gulp-sourcemaps": "^2.6.1",
     "postcss": "^6.0.11",
@@ -29,7 +31,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist/*;postcss --use autoprefixer --dir dist/ src/*.css;eslint src/*.js && babel src/home.js | uglifyjs > dist/home.js; echo 'success';",
-    "build2": "gulp"
+    "build2": "gulp",
+    "build3":"gulp watch"
   },
   "repository": {
     "type": "git",
