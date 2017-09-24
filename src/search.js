@@ -1,11 +1,14 @@
 /*输入input*/
-!function($,window,AV){
+define(['jquery','av'],function($,AV){
     let timer=null
-    $('input#search').on('input',function() {
-        reset()
-        throttle(searchDisplayResult,400)
+    function xxx(){
+        $('input#search').on('input',function() {
+            reset()
+            throttle(searchDisplayResult,400)
 
-    })
+        })
+    }
+    return xxx
     function reset(){
         $('label').addClass('noactive')
         $('.icon2').addClass('active')
@@ -91,4 +94,6 @@
         let li=`<li>搜索"${value}"<li/>`
         $('#searchKey').append(li)
     }
-}(jQuery,window,AV)
+})
+
+

@@ -1,62 +1,66 @@
+define(['jquery','av'],function($,AV){
+    function yyy() {
+        /*点击取消input按钮*/
+        $('.icon2').on('click', function (e) {
+            $('input#search').val('')
+            $('label').removeClass('noactive')
+            $('#searchKey').empty()
+            $('#wrapper').removeClass('noactive')
+            $('#searchLog').removeClass('noactive')
+            $('#searchResult').addClass('noactive')
+        })
+        /*点击热搜*/
+        $('#hot-search').on('click', 'li', function (e) {
+            reset()
+            let value = $(e.currentTarget).text()
+            $('input#search').val(value)
+            let timer = null
+            if (timer) {
+                window.clearTimeout(timer)
+            }
+            timer = setTimeout(function () {
+                timer = null
+                search()
+                $('#searchResult').removeClass('noactive')
+                $('#searchLog').addClass('noactive')
 
-/*点击取消input按钮*/
-$('.icon2').on('click',function(e){
-    $('input#search').val('')
-    $('label').removeClass('noactive')
-    $('#searchKey').empty()
-    $('#wrapper').removeClass('noactive')
-    $('#searchLog').removeClass('noactive')
-    $('#searchResult').addClass('noactive')
-})
-/*点击热搜*/
-$('#hot-search').on('click','li',function(e){
-    reset()
-    let value=$(e.currentTarget).text()
-    $('input#search').val(value)
-    let timer=null
-    if(timer){window.clearTimeout(timer)}
-    timer=setTimeout(function(){
-        timer=null
-        search()
-        $('#searchResult').removeClass('noactive')
-        $('#searchLog').addClass('noactive')
+                $('#wrapper').addClass('noactive')
 
-        $('#wrapper').addClass('noactive')
-
-        $('#searchKey').empty()
-        let $li=$(e.currentTarget)
-        let value=$li.text()
-        console.log(value)
-        let li=`<li>搜索"${value}"<li/>`
-        $('#searchKey').append(li)
-    },400)
-})
-/*点击取消搜索记录*/
-$('#searchLog').on('click','#icon4',function(e){
-    let $icon4=$(e.currentTarget)
-    let $div=$icon4.parent()
-    $div.remove()
-})
-/*查找函数*/
-function search(){
-    reset()
-    let value=$('input#search').val().trim()
-    let $searchResult = $('ul#searchResult')
-    let $searchLog = $('ul#searchLog')
-    if(value===''){
-        $('label').removeClass('noactive')
-        return}
-    var query = new AV.Query('Song');
-    query.contains('name', value);
-    query.find().then(function (results) {
-        console.log(1)
-        $searchResult.empty()
-        if(results.length===0){
+                $('#searchKey').empty()
+                let $li = $(e.currentTarget)
+                let value = $li.text()
+                console.log(value)
+                let li = `<li>搜索"${value}"<li/>`
+                $('#searchKey').append(li)
+            }, 400)
+        })
+        /*点击取消搜索记录*/
+        $('#searchLog').on('click', '#icon4', function (e) {
+            let $icon4 = $(e.currentTarget)
+            let $div = $icon4.parent()
+            $div.remove()
+        })
+        /*查找函数*/
+        function search() {
+            reset()
+            let value = $('input#search').val().trim()
+            let $searchResult = $('ul#searchResult')
+            let $searchLog = $('ul#searchLog')
+            if (value === '') {
+                $('label').removeClass('noactive')
+                return
+            }
+            var query = new AV.Query('Song');
+            query.contains('name', value);
+            query.find().then(function (results) {
+                console.log(1)
+                $searchResult.empty()
+                if (results.length === 0) {
 //                $searchResult.html('结果不存在')
-        }else{
-            for(let i=0;i<results.length;i++){
-                let song=results[i].attributes
-                let div=`
+                } else {
+                    for (let i = 0; i < results.length; i++) {
+                        let song = results[i].attributes
+                        let div = `
                                 <div>
                                     <svg class="icon">
                                         <use xlink:href="#icon-search"></use>
@@ -64,17 +68,17 @@ function search(){
                                     <a href="./song.html?id=${results[i].id}"><li data-id="${results[i].id}">${song.name} - ${song.singer}</li></a>
                                 </div>
                              `
-                $searchResult.append(div)
-            }
-        }
-    })
-    query.find().then(function (results) {
-        if(results.length===0){
+                        $searchResult.append(div)
+                    }
+                }
+            })
+            query.find().then(function (results) {
+                if (results.length === 0) {
 //                $searchResult.html('结果不存在')
-        }else{
-            for(let i=0;i<results.length;i++){
-                let song=results[i].attributes
-                let div=`
+                } else {
+                    for (let i = 0; i < results.length; i++) {
+                        let song = results[i].attributes
+                        let div = `
                                 <div id="div">
                                     <svg class="icon icon3">
                                         <use xlink:href="#icon-shizhong"></use>
@@ -86,16 +90,21 @@ function search(){
                                 </div>
 
                              `
-                $searchLog.prepend(div)
-            }
+                        $searchLog.prepend(div)
+                    }
+                }
+            })
         }
-    })
-}
-/*重置函数（点击时清理input内容，消除取消键）*/
-function reset(){
-    $('label').addClass('noactive')
-    $('.icon2').addClass('active')
-}
+
+        /*重置函数（点击时清理input内容，消除取消键）*/
+        function reset() {
+            $('label').addClass('noactive')
+            $('.icon2').addClass('active')
+        }
+    }
+    return yyy
+})
+
 //存储信息
 /* var SongObject = AV.Object.extend('Song'); //生成一个新的数据库
  var songObject = new SongObject();//在数据库生成新的记录

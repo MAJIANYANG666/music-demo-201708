@@ -449,39 +449,41 @@
     </div>
   </div>
   <script src="//at.alicdn.com/t/font_397568_1pgfmmfiz6o8byb9.js"></script>
-  <script src="./vendors/jquery.min.js"></script>
-  <script src="./vendors/av-min.js"></script>
-  <script src="./scripts/av.js"></script>
+  <script data-main="./src/main.js" src="./vendors/require.js"></script>
   <script>
-      window.app={}
-      window.loadScript=function(url,callback){
-          let script=document.createElement('script')
-          script.src=url
-          script.onload=function() {
-              callback()
+      requirejs.config({
+          paths: {
+              jquery: '../vendors/jquery.min', // 路径2
+              av:'../vendors/av-min'
           }
-          document.head.appendChild(script)
-      }
+      });
   </script>
+  <!--<script>-->
+      <!--window.app={}-->
+      <!--window.loadScript=function(url,callback){-->
+          <!--let script=document.createElement('script')-->
+          <!--script.src=url-->
+          <!--script.onload=function() {-->
+              <!--callback()-->
+          <!--}-->
+          <!--document.head.appendChild(script)-->
+      <!--}-->
+  <!--</script>-->
 
-  <script src="./dist/home.js"></script>
-  <!--<script data-main="./src/home.js" src="./vendors/require.js"></script>-->
-  <script src="./dist/loadSongs.js"></script>
-  <script src="./dist/search.js"></script>
-  <script>
-      if(!app.tabs){
-          loadScript('./src/tabs.js',function(){
-              app.tabs('.tabs')
-          })
-      }else{
-          app.tabs('.tabs')
-      }
-  </script>
-  <script src="./dist/tabs.js"></script>
-
-
-
-
+  <!--<script src="./dist/home.js"></script>-->
+  <!---->
+  <!--<script src="./dist/loadSongs.js"></script>-->
+  <!--<script src="./dist/search.js"></script>-->
+  <!--<script>-->
+      <!--if(!app.tabs){-->
+          <!--loadScript('./src/tabs.js',function(){-->
+              <!--app.tabs('.tabs')-->
+          <!--})-->
+      <!--}else{-->
+          <!--app.tabs('.tabs')-->
+      <!--}-->
+  <!--</script>-->
+  <!--<script src="./dist/tabs.js"></script>-->
 </body>
 </html>
                                                                                                                                                                                                                                                                                            

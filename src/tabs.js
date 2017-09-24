@@ -1,5 +1,5 @@
 /*tabs*/
-!function($,app){
+define(['jquery'],function($){
     function tabs(selectorOrDom){
         let $tabs=$(selectorOrDom)
         $tabs.on('click','li',function(e){
@@ -10,6 +10,9 @@
             $page.addClass('active').siblings('.active').removeClass('active')
         })
     }
-    app.tabs=tabs
-}(jQuery,app)
+    return tabs
+})
+
+
+
 

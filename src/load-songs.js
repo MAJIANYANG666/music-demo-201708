@@ -1,6 +1,6 @@
 //加载完成显示最新歌曲
-!function($,AV){
-    loadSongs()
+define(['jquery','av'],function($,AV){
+
     function loadSongs() {
         getSongs().then(fillSongs, function (error) {
             alert('获取歌曲失败')
@@ -34,4 +34,7 @@
             $('ul#song').append(li)
         }
     }
-}(jQuery,AV)
+    return loadSongs
+})
+
+
