@@ -2,11 +2,7 @@
 define(['jquery','av'],function($,AV){
     let timer=null
     function xxx(){
-        $('input#search').on('input',function() {
-            reset()
-            throttle(searchDisplayResult,400)
-
-        })
+        $('input#search').bind('input',function() {reset();throttle(searchDisplayResult,400)})
     }
     return xxx
     function reset(){

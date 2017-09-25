@@ -200,15 +200,11 @@
     height:0.9em;
 
 }
-.latest-songs >ul > li p{
+.latest-songs >ul > li span{
     display: inline;
     font-size:12px;
     color: #888;
     line-height:18px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
 }
 .latest-songs >ul > li > a > svg{
     position: absolute;
@@ -288,6 +284,9 @@
     position: relative;
     z-index:2;
 }
+.page2>.hot-songs > ul >div{
+    text-align: center;
+}
 .page2>.hot-songs >ul li{
     position: relative;
     padding:5px 0;
@@ -295,37 +294,45 @@
 }
 .page2>.hot-songs >ul > li > a{
     display: block;
-    margin-left:40px;
     border-bottom: 1px solid #EFEFF0;
 }
-.page2>.hot-songs >ul > li >p{
+.page2>.hot-songs >ul>li:nth-child(1) >a>p,
+.page2>.hot-songs >ul>li:nth-child(2) >a>p,
+.page2>.hot-songs >ul>li:nth-child(3) >a>p{
+    color: #E76C36;
+}
+.page2>.hot-songs >ul > li >a>p{
     position: absolute;
     left:10px;
     top:50%;
     -webkit-transform:translateY(-50%);
             transform:translateY(-50%);
     font-size:17px;
+    color: #999;
 }
-.page2>.hot-songs >ul > li >p.active{
-    color: #E76C36;
-}
-.page2>.hot-songs >ul > li div{
 
+.page2>.hot-songs >ul > li div{
+    margin-left:40px;
 }
 .page2>.hot-songs >ul > li div > h3{
     font-size:17px;
     line-height:25px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
 }
 .page2>.hot-songs >ul > li div > svg{
     width:0.9em;
     height:0.9em;
 
 }
-.page2>.hot-songs >ul > li div >p{
-    display: inline;
+.page2>.hot-songs >ul > li div >span{
+    display: inline-block;
     font-size:12px;
     color: #888;
     line-height:18px;
+
 }
 .page2>.hot-songs >ul > li > a > svg{
     position: absolute;

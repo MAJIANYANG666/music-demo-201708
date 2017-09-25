@@ -56,7 +56,7 @@ define(['jquery','av'],function($,AV){
                 console.log(1)
                 $searchResult.empty()
                 if (results.length === 0) {
-//                $searchResult.html('结果不存在')
+               $searchResult.html('结果不存在')
                 } else {
                     for (let i = 0; i < results.length; i++) {
                         let song = results[i].attributes
@@ -74,7 +74,7 @@ define(['jquery','av'],function($,AV){
             })
             query.find().then(function (results) {
                 if (results.length === 0) {
-//                $searchResult.html('结果不存在')
+               $searchResult.html('结果不存在')
                 } else {
                     for (let i = 0; i < results.length; i++) {
                         let song = results[i].attributes

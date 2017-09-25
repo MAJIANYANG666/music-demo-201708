@@ -6,7 +6,7 @@ define(['jquery','av'],function($,AV){
             alert('获取歌曲失败')
         })
     }
-    function template(song,results){
+    function template1(song,results){
         return `<li>
             <a href="./song.html?id=${results.id}">
               <div class="wrapper">
@@ -14,13 +14,48 @@ define(['jquery','av'],function($,AV){
                 <svg class="icon " >
                   <use xlink:href="#icon-SQ"></use>
                 </svg>
-                <p>${song.singer}</p>
+                <span>${song.singer}</span>
               </div>
               <svg class="icon " >
                 <use xlink:href="#icon-bofangjian60px"></use>
               </svg>
             </a>
           </li>`
+    }
+    function template2(i,song,results){
+        if(i<9){
+            li=`<li>
+            <a href="./song.html?id=${results.id}">
+            <p >0${i+1}</p>
+              <div class="wrapper">
+                <h3>${song.name}</h3>
+                <svg class="icon " >
+                  <use xlink:href="#icon-SQ"></use>
+                </svg>
+                <span>${song.singer}</span>
+              </div>
+              <svg class="icon " >
+                <use xlink:href="#icon-bofangjian60px"></use>
+              </svg>
+            </a>
+          </li>`
+        }else{
+            li=`<li>
+            <a href="./song.html?id=${results.id}">
+            <p >${i+1}</p>
+              <div class="wrapper">
+                <h3>${song.name}</h3>
+                <svg class="icon " >
+                  <use xlink:href="#icon-SQ"></use>
+                </svg>
+                <span>${song.singer}</span>
+              </div>
+              <svg class="icon " >
+                <use xlink:href="#icon-bofangjian60px"></use>
+              </svg>
+            </a>
+          </li>`}
+        return li
     }
     function getSongs(){
         var query = new AV.Query('Song');
@@ -30,8 +65,14 @@ define(['jquery','av'],function($,AV){
         $('#songs-loading').remove()
         for(let i=0;i<results.length;i++) {
             let song = results[i].attributes
-            let li = template(song,results[i])
+            let li = template1(song,results[i])
             $('ul#song').append(li)
+        }
+        $('#hot-songs-loading').remove()
+        for(let i=0;i<results.length;i++) {
+            let song = results[i].attributes
+            let li = template2(i,song,results[i])
+            $('ul#hot-song').append(li)
         }
     }
     return loadSongs
