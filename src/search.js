@@ -2,7 +2,10 @@
 define(['jquery','av'],function($,AV){
     let timer=null
     function xxx(){
-        $('input#search').bind('input',function() {reset();throttle(searchDisplayResult,400)})
+        $('input#search').on('input',function() {
+            reset()
+            throttle(searchDisplayResult,400)
+        })
     }
     return xxx
     function reset(){
@@ -55,8 +58,12 @@ define(['jquery','av'],function($,AV){
     }
     function generateSearchResult1(results){
         $('ul#searchResult').empty()
+        $('#searchNoresult').removeClass('noactive')
+        $('#searchResult').removeClass('noactive')
         if(results.length===0){
-            $('ul#searchResult').html('结果不存在')
+            $('ul#searchNoresult').empty()
+            let div=`<div>结果不存在</div>`
+            $('ul#searchNoresult').append(div)
         }else{
             for(let i=0;i<results.length;i++){
                 let div=template1(results[i])
@@ -66,7 +73,7 @@ define(['jquery','av'],function($,AV){
     }
     function generateSearchResult2(results){
         if(results.length===0){
-            $('ul#searchResult').html('结果不存在')
+            return
         }else{
             for(let i=0;i<results.length;i++){
                 let div=template2(results[i])

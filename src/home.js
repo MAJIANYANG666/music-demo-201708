@@ -8,6 +8,9 @@ define(['jquery','av'],function($,AV){
             $('#wrapper').removeClass('noactive')
             $('#searchLog').removeClass('noactive')
             $('#searchResult').addClass('noactive')
+            $('#searchNoresult').addClass('noactive')
+            $('#searchNoresult').empty()
+
         })
         /*点击热搜*/
         $('#hot-search').on('click', 'li', function (e) {
@@ -23,9 +26,7 @@ define(['jquery','av'],function($,AV){
                 search()
                 $('#searchResult').removeClass('noactive')
                 $('#searchLog').addClass('noactive')
-
                 $('#wrapper').addClass('noactive')
-
                 $('#searchKey').empty()
                 let $li = $(e.currentTarget)
                 let value = $li.text()
@@ -46,6 +47,7 @@ define(['jquery','av'],function($,AV){
             let value = $('input#search').val().trim()
             let $searchResult = $('ul#searchResult')
             let $searchLog = $('ul#searchLog')
+            let $searchNoresult=$('ul#searchNoresult')
             if (value === '') {
                 $('label').removeClass('noactive')
                 return
@@ -53,10 +55,13 @@ define(['jquery','av'],function($,AV){
             var query = new AV.Query('Song');
             query.contains('name', value);
             query.find().then(function (results) {
-                console.log(1)
                 $searchResult.empty()
                 if (results.length === 0) {
-               $searchResult.html('结果不存在')
+                    $('#searchNoresult').removeClass('noactive')
+
+                    $searchNoresult.empty()
+                    let div=`<div>结果不存在</div>`
+                    $searchNoresult.append(div)
                 } else {
                     for (let i = 0; i < results.length; i++) {
                         let song = results[i].attributes
@@ -74,7 +79,7 @@ define(['jquery','av'],function($,AV){
             })
             query.find().then(function (results) {
                 if (results.length === 0) {
-               $searchResult.html('结果不存在')
+                    return
                 } else {
                     for (let i = 0; i < results.length; i++) {
                         let song = results[i].attributes
@@ -95,7 +100,6 @@ define(['jquery','av'],function($,AV){
                 }
             })
         }
-
         /*重置函数（点击时清理input内容，消除取消键）*/
         function reset() {
             $('label').addClass('noactive')

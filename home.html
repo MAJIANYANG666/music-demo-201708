@@ -116,18 +116,18 @@
 
     </div>
     <div class="page page3">
-      <form oninput="return false" onkeypress="return false" >
+      <section >
         <div class="wrapper1">
           <svg class="icon icon1" >
             <use xlink:href="#icon-search"></use>
           </svg>
-          <input id="search" type="text" name="search">
+          <input id="search" type="text" name="search" placeholder value autocomplete="off">
           <svg id="icon2" class="icon icon2" >
             <use xlink:href="#icon-quxiao"></use>
           </svg>
           <label >搜索歌曲、歌手、专辑</label>
         </div>
-      </form>
+      </section>
       <div id="wrapper" class="wrapper2">
         <h4>热门搜索</h4>
         <ul id="hot-search">
@@ -147,6 +147,8 @@
       <ul id="searchResult" class="searchResult">
       </ul>
       <ul id="searchLog" class="searchLog">
+      </ul>
+      <ul id="searchNoresult" class="searchNoresult">
       </ul>
     </div>
   </div>
