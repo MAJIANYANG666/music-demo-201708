@@ -49,6 +49,8 @@ define(['jquery','av'],function($,AV){
             let $searchLog = $('ul#searchLog')
             let $searchNoresult=$('ul#searchNoresult')
             if (value === '') {
+                $('#searchNoresult').addClass('noactive')
+                $('#searchNoresult').empty()
                 $('label').removeClass('noactive')
                 return
             }
@@ -58,11 +60,11 @@ define(['jquery','av'],function($,AV){
                 $searchResult.empty()
                 if (results.length === 0) {
                     $('#searchNoresult').removeClass('noactive')
-
                     $searchNoresult.empty()
                     let div=`<div>结果不存在</div>`
                     $searchNoresult.append(div)
                 } else {
+                    $('ul#searchNoresult').empty()
                     for (let i = 0; i < results.length; i++) {
                         let song = results[i].attributes
                         let div = `

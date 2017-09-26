@@ -36,17 +36,15 @@ define(['jquery','av'],function($,AV){
     }
     function template2(result){
         let song=result.attributes
-        return `
-            <div id="div">
+        return `<div id="div">
                 <svg class="icon icon3">
                     <use xlink:href="#icon-shizhong"></use>
                 </svg>
-                <a href="./song.html?id=${results[i].id}"><li data-id="${results[i].id}">${song.name} - ${song.singer}</li></a>
+                <a href="./song.html?id=${result.id}"><li data-id="${result.id}">${song.name} - ${song.singer}</li></a>
                 <svg id="icon4" class="icon icon4">
                     <use xlink:href="#icon-quxiao1"></use>
                 </svg>
-            </div>
-         `
+            </div>`
     }
     function searchSongs(value){
         var query1 = new AV.Query('Song');
@@ -65,6 +63,7 @@ define(['jquery','av'],function($,AV){
             let div=`<div>结果不存在</div>`
             $('ul#searchNoresult').append(div)
         }else{
+            $('ul#searchNoresult').empty()
             for(let i=0;i<results.length;i++){
                 let div=template1(results[i])
                 $('ul#searchResult').append(div)
@@ -84,6 +83,8 @@ define(['jquery','av'],function($,AV){
     function search(){
         let value=$('input#search').val().trim()
         if(value===''){
+            $('#searchNoresult').addClass('noactive')
+            $('#searchNoresult').empty()
             $('label').removeClass('noactive')
             return}
         searchSongs(value).then(generateSearchResult1)
