@@ -2,6 +2,8 @@
 body{
     color: white;
     background-color: rgb(127,127,127);
+    position: relative;
+    z-index:-1;
 }
 .page{
     position: relative;
