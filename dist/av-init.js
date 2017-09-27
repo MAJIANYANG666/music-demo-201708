@@ -1,0 +1,1 @@
+"use strict";define(["av"],function(n){return function(){n.init({appId:"C97vnqMpJpDB05tNiObyKutc-gzGzoHsz",appKey:"REdfXRGxVNRvvUUg62V1aqjN"})}});

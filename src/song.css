@@ -1,0 +1,179 @@
+
+body{
+    color: white;
+    background-color: rgb(127,127,127);
+}
+.page{
+    position: relative;
+    height:100vh;
+    padding-top:0.1px;
+    display: flex;
+    flex-direction: column;
+}
+.page::before{
+    content: '';
+    position: absolute;
+    filter: blur(30px) brightness(50%);
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+
+    z-index:-1;
+}
+section.pointer{
+    position: absolute;
+    left:50%;
+    top:0;
+    transform:translateX(-20%) rotateZ(-10deg);
+    transform-origin: left top;
+    transition: transform 1s;
+    width:26.25vw;
+    height:38.125vw;
+    background: transparent url(https://i.loli.net/2017/08/31/59a7c8dc4ed91.png) no-repeat center center;
+    background-size: cover;
+    z-index:1;
+}
+section.pointer.playing{
+    transform:translateX(-20%) rotateZ(0deg);
+    transform-origin: left top;
+    transition: transform 1s;
+}
+
+section.disk {
+    margin-top: 19.6875vw;
+
+}
+section.disk>.circle{
+    width:77.5vw;
+    height:77.5vw;
+    margin:0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section.disk>.circle::before{
+    content:'';
+    position: absolute;
+    left:0;
+    right:0;
+    width:100%;
+    height:100%;
+    background: transparent url(//i.loli.net/2017/08/31/59a7cd94d2b3b.png) no-repeat center center;
+    background-size: cover;
+    animation:spin 20s linear infinite;
+    animation-play-state:paused;
+}
+
+section.disk>.circle::after{
+    content:'';
+    position: absolute;
+    left:0;
+    right:0;
+    width:100%;
+    height:100%;
+    background: transparent url(//i.loli.net/2017/08/31/59a7cd94a04d6.png) no-repeat center center;
+    background-size: cover;
+    animation:spin 20s linear infinite;
+    animation-play-state:paused;
+}
+section.disk>.circle.playing::after{
+    animation-play-state:running;
+}
+section.disk>.circle>img{
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin-left:-23.4375vw;
+    margin-top:-23.4375vw;
+    width:46.875vw;
+    height:46.875vw;
+    z-index:-1;
+    border-radius:50%;
+    animation:spin 20s linear infinite;
+    animation-play-state:paused;
+}
+section.disk>.circle.playing>img{
+    animation-play-state:running;
+}
+section.disk>.circle>.play{
+    width:15.625vw;
+    height:15.625vw;
+    fill:white;
+    z-index:1;
+}
+section.disk>.circle.playing>.play{
+    display: none;
+}
+section.disk>.circle>.pause{
+    display: none;
+    width:15.625vw;
+    height:15.625vw;
+    fill:white;
+    z-index:1;
+}
+section.disk>.circle.playing>.pause{
+    display: block;
+}
+
+@keyframes spin{
+    0%{
+        transform: rotateZ(0deg);
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+section.lyric{
+    text-align: center;
+    flex-grow:1;
+}
+section.lyric>.title{
+    margin-top:5.6875vw;
+    font-size:13px;
+    color: #aaa;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+section.lyric>.title span{
+    font-size:15px;
+    line-height:2.5;
+    color: white;
+
+}
+section.lyric>.lyrics{
+    height:78px;
+    overflow: hidden;
+}
+section.lyric>.lyrics>,lines{
+    transition:transform 0.3s;
+}
+section.lyric>.lyrics li{
+    font-size:13px;
+    color: #aaa;
+    line-height:26px;
+}
+section.lyric>.lyrics li.active{
+    color: white;
+}
+section.actions{
+    text-align: center;
+    margin-bottom:10px;
+}
+section.actions>span{
+    display:inline-block;
+    padding:2.8125vw 13.125vw;
+    border:1px solid #D43B32;
+    border-radius:5px;
+    margin:5px;
+    color: #D43B32;
+    text-align: center;
+    letter-spacing:0.9375vw;
+}
+section.actions>span.main {
+    color: white;
+    background: #D43B32;
+}

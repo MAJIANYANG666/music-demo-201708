@@ -83,7 +83,6 @@ define(['jquery','av'],function($,AV){
     function search(){
         let value=$('input#search').val().trim()
         if(value===''){
-
             $('#searchNoresult').empty()
             $('label').removeClass('noactive')
             return}

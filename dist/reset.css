@@ -1,6 +1,6 @@
-*{margin:0;  padding:0;border-box:box-sizing;}
-*::before{border-box:box-sizing;}
-*::after{border-box:box-sizing;}
+*{margin:0;  padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;}
+*::before{-webkit-box-sizing:border-box;box-sizing:border-box;}
+*::after{-webkit-box-sizing:border-box;box-sizing:border-box;}
 a{text-decoration: none;color:inherit;
     vertical-align: top;}
 ul,ol,li{list-style:none;}

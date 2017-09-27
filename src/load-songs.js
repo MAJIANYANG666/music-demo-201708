@@ -1,6 +1,5 @@
 //加载完成显示最新歌曲
 define(['jquery','av'],function($,AV){
-
     function loadSongs() {
         getSongs().then(fillSongs, function (error) {
             alert('获取歌曲失败')
@@ -24,7 +23,7 @@ define(['jquery','av'],function($,AV){
     }
     function template2(i,song,results){
         if(i<9){
-            li=`<li>
+            return `<li>
             <a href="./song.html?id=${results.id}">
             <p >0${i+1}</p>
               <div class="wrapper">
@@ -40,7 +39,7 @@ define(['jquery','av'],function($,AV){
             </a>
           </li>`
         }else{
-            li=`<li>
+            return `<li>
             <a href="./song.html?id=${results.id}">
             <p >${i+1}</p>
               <div class="wrapper">
@@ -55,7 +54,6 @@ define(['jquery','av'],function($,AV){
               </svg>
             </a>
           </li>`}
-        return li
     }
     function getSongs(){
         var query = new AV.Query('Song');

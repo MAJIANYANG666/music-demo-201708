@@ -1,0 +1,1 @@
+"use strict";requirejs.config({paths:{jquery:"../vendors/jquery.min",av:"../vendors/av-min"}}),require(["./tabs","./load-songs","./search","./av-init","./home"],function(e,s,r,i,n){i(),e(".tabs"),s(),r(),n()});
