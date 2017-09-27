@@ -56,7 +56,7 @@ define(['jquery','av'],function($,AV){
     }
     function generateSearchResult1(results){
         $('ul#searchResult').empty()
-        $('#searchNoresult').removeClass('noactive')
+
         $('#searchResult').removeClass('noactive')
         if(results.length===0){
             $('ul#searchNoresult').empty()
@@ -83,7 +83,7 @@ define(['jquery','av'],function($,AV){
     function search(){
         let value=$('input#search').val().trim()
         if(value===''){
-            $('#searchNoresult').addClass('noactive')
+
             $('#searchNoresult').empty()
             $('label').removeClass('noactive')
             return}

@@ -8,7 +8,7 @@ define(['jquery','av'],function($,AV){
             $('#wrapper').removeClass('noactive')
             $('#searchLog').removeClass('noactive')
             $('#searchResult').addClass('noactive')
-            $('#searchNoresult').addClass('noactive')
+
             $('#searchNoresult').empty()
 
         })
@@ -59,7 +59,7 @@ define(['jquery','av'],function($,AV){
             query.find().then(function (results) {
                 $searchResult.empty()
                 if (results.length === 0) {
-                    $('#searchNoresult').removeClass('noactive')
+
                     $searchNoresult.empty()
                     let div=`<div>结果不存在</div>`
                     $searchNoresult.append(div)
