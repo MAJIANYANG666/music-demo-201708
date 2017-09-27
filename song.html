@@ -26,8 +26,9 @@
             filter: blur(30px) brightness(50%);
             left:0;
             top:0;
-            height:100%;
-            width:100%;
+            bottom:0;
+            right:0;
+
             z-index:-1;
         }
         section.pointer{
@@ -37,8 +38,8 @@
             transform:translateX(-20%) rotateZ(-10deg);
             transform-origin: left top;
             transition: transform 1s;
-            width:84px;
-            height:122px;
+            width:26.25vw;
+            height:38.125vw;
             background: transparent url(https://i.loli.net/2017/08/31/59a7c8dc4ed91.png) no-repeat center center;
             background-size: cover;
             z-index:1;
@@ -50,12 +51,12 @@
         }
 
         section.disk {
-            margin-top: 63px;
+            margin-top: 19.6875vw;
 
         }
         section.disk>.circle{
-            width:248px;
-            height:248px;
+            width:77.5vw;
+            height:77.5vw;
             margin:0 auto;
             position: relative;
             display: flex;
@@ -94,8 +95,10 @@
             position: absolute;
             left:50%;
             top:50%;
-            margin-left:-75px;
-            margin-top:-75px;
+            margin-left:-23.4375vw;
+            margin-top:-23.4375vw;
+            width:46.875vw;
+            height:46.875vw;
             z-index:-1;
             border-radius:50%;
             animation:spin 20s linear infinite;
@@ -105,8 +108,8 @@
             animation-play-state:running;
         }
         section.disk>.circle>.play{
-            width:50px;
-            height:50px;
+            width:15.625vw;
+            height:15.625vw;
             fill:white;
             z-index:1;
         }
@@ -115,8 +118,8 @@
         }
         section.disk>.circle>.pause{
             display: none;
-            width:50px;
-            height:50px;
+            width:15.625vw;
+            height:15.625vw;
             fill:white;
             z-index:1;
         }
@@ -137,7 +140,7 @@
             flex-grow:1;
             }
         section.lyric>.title{
-            margin-top:15px;
+            margin-top:5.6875vw;
             font-size:13px;
             color: #aaa;
             display: -webkit-box;
@@ -168,16 +171,17 @@
         }
         section.actions{
             text-align: center;
+            margin-bottom:10px;
         }
         section.actions>span{
             display:inline-block;
-            padding:9px 42px;
+            padding:2.8125vw 13.125vw;
             border:1px solid #D43B32;
             border-radius:5px;
             margin:5px;
             color: #D43B32;
             text-align: center;
-            letter-spacing:3px;
+            letter-spacing:0.9375vw;
         }
         section.actions>span.main{
             color: white;
@@ -190,7 +194,7 @@
         <section class="pointer"></section>
         <section class="disk">
             <div class="circle" id="circle">
-                <img id="disk-image" src="//ov8ky0xr6.bkt.clouddn.com/song-bg.png" width="150" height="150" alt="">
+                <img id="disk-image" src="//ov8ky0xr6.bkt.clouddn.com/song-bg.png"  alt="">
                     <svg id="play" class="icon play" >
                         <use xlink:href="#icon-cplay1"></use>
                     </svg>
