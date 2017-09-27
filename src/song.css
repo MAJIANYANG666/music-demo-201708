@@ -89,7 +89,6 @@ section.disk>.circle>img{
     margin-top:-23.4375vw;
     width:46.875vw;
     height:46.875vw;
-    z-index:-1;
     border-radius:50%;
     animation:spin 20s linear infinite;
     animation-play-state:paused;
